@@ -22,7 +22,7 @@ static ALLOCATOR: SQLite3Allocator = SQLite3Allocator {};
 
 // This must be our panic handler for WASM builds. For simplicity, we make it our panic handler for
 // all builds. Abort is also more portable than unwind, enabling us to go to more embedded use cases.
-#[panic_handler]
+#[cfg(target_family = "wasm", panic_handler)]
 fn panic(_info: &PanicInfo) -> ! {
     core::intrinsics::abort()
 }
